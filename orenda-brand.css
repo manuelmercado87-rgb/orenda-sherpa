@@ -1,0 +1,380 @@
+/* ================================================
+   BRAND OVERRIDES — Orenda & Sherpa
+   Applied on top of orenda.css
+   ================================================ */
+
+/* ── ORENDA BRAND PALETTE ──
+   Teal: #27C3C0 / #009D97
+   Blue: #0164BF / #2CA2DA
+   Orange: #FF6600
+   Dark navy: #0C34A7
+   Light teal: #D4F5F4
+   ────────────────────────── */
+
+/* ── NAV: Orenda teal CTA ── */
+.nav-cta { background: #27C3C0; color: #FFFFFF; }
+.nav-cta:hover { background: #0C34A7; }
+#nav.scrolled .nav-cta { color: #FFFFFF; }
+
+/* ── HERO: Teal-to-navy gradient ── */
+#hero {
+  background: linear-gradient(135deg, #021A2E 0%, #04345A 35%, #065275 65%, #021A2E 100%);
+}
+.hero-photo-hint {
+  background: linear-gradient(135deg, #021A2E 0%, #053D5F 40%, #074E6A 70%, #021A2E 100%);
+}
+.hero-label { color: #27C3C0; }
+.hero-headline em { color: #27C3C0; }
+.btn-hero { background: #FF6600; color: #FFFFFF; }
+.btn-hero:hover { background: #27C3C0; color: #FFFFFF; }
+
+/* ── MARQUEE 1: Orenda teal ── */
+.marquee-strip:first-of-type {
+  background: #D4F5F4;
+  border-top-color: rgba(39,195,192,0.2);
+  border-bottom-color: rgba(39,195,192,0.2);
+}
+.marquee-strip:first-of-type .marquee-item { color: #009D97; }
+
+#mision .section-title { font-size: clamp(36px, 4vw, 56px); margin-bottom: 16px; }
+#mision .mision-accent { background: #27C3C0; }
+#mision .mision-img {
+  background: linear-gradient(135deg, #021A2E 0%, #065275 50%, #04345A 100%);
+}
+#mision .mision-quote { border-left-color: #27C3C0; }
+
+/* ── LA REALIDAD ── */
+#realidad { background: #FAFFFE; }
+#realidad .realidad-sub { color: #27C3C0; }
+.realidad-num { color: #2CA2DA; }
+
+/* ── MODELO ── */
+#modelo { background: #EFF9F9; }
+.pathway-dot { background: #27C3C0; border-color: #0164BF; }
+.pathway-arrow { color: #27C3C0; }
+
+/* ── CARRERAS ── */
+#carreras { background: #F0FAFA; }
+.carreras-bg-num { color: rgba(39,195,192,0.12); }
+.carrera-item:hover h4 { text-decoration-color: #27C3C0; }
+
+/* ── IMPACTO ── */
+#impacto { background: #021A2E; }
+.stat-number { color: #27C3C0; }
+.stat-number.lav { color: #2CA2DA; }
+
+/* ── FUNDADORA ── */
+#fundadora {
+  background: #D4F5F4;
+}
+#fundadora .fundadora-img {
+  background: linear-gradient(135deg, #021A2E 0%, #04345A 50%, #065275 100%);
+}
+#fundadora .fundadora-quote-mark { color: #009D97; }
+
+/* ── TESTIMONIOS ── */
+#testimonios { background: #FAFFFE; }
+.testimonio-accent { color: #27C3C0; }
+.testimonio-avatar { background: linear-gradient(135deg, #27C3C0, #0164BF); }
+
+/* ── ALIADOS ── */
+#aliados { background: #F0FAFA; }
+.aliado-item:hover { background: #D4F5F4; }
+
+/* ── MARQUEE 1 button override ── */
+#hero .btn-hero .arrow { transition: transform 0.2s; }
+
+/* =================================================
+   SHERPA BRAND PALETTE (oficial)
+   Dark:     #052f35 — verde oscuro profundo (fondo)
+   Teal:     #035966 — teal oscuro
+   Lime:     #b1ed0a — lima eléctrico (acento principal)
+   Lavender: #c7b5f3 — lavanda suave
+   Mint:     #31b498 — teal/menta
+   ================================================= */
+
+/* ── SHERPA DIVIDER ── */
+#sherpa-divider {
+  position: relative;
+  overflow: hidden;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #021a1e;
+}
+.sd3-mountains {
+  position: absolute; inset: 0; z-index: 0;
+  background: 
+    linear-gradient(to bottom, rgba(2,26,30,0.55) 0%, rgba(2,26,30,0.3) 40%, rgba(2,26,30,0.65) 100%),
+    url('https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?fm=jpg&q=80&w=2400&auto=format&fit=crop') center center / cover no-repeat;
+}
+.sd3-svg { display: none; }
+.sd3-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 0 48px;
+  max-width: 900px;
+}
+.sd3-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: #b1ed0a;
+  margin-bottom: 24px; display: block;
+}
+.sd3-headline {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0; margin-bottom: 32px;
+}
+.sd3-h-top {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 400; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  display: block; margin-bottom: 4px;
+}
+.sd3-h-mid {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(100px, 16vw, 220px);
+  line-height: 0.82; letter-spacing: 0.02em;
+  color: #fff; display: block;
+}
+.sd3-h-mid em { font-style: normal; color: #b1ed0a; }
+.sh-left-logo {
+  display: block;
+  max-width: min(420px, 100%);
+  width: 100%;
+  height: auto;
+  margin-bottom: 24px;
+}
+.sh-left-title { margin-bottom: 0 !important; }
+
+.sd3-logo {
+  display: block;
+  max-width: min(720px, 70vw);
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.sd3-h-bot {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(14px, 1.4vw, 18px);
+  font-weight: 400; line-height: 1.6;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.02em;
+  display: block; margin-top: 12px;
+}
+.sd3-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #b1ed0a; color: #021a1e;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 14px 28px;
+  text-decoration: none; transition: all 0.2s;
+}
+.sd3-cta:hover { background: #fff; }
+@media (max-width: 768px) {
+  .sd3-content { padding: 0 24px; }
+  .sd3-h-mid { font-size: clamp(72px, 20vw, 120px); }
+}
+
+/* ── SHERPA HERO ── */
+#sherpa-hero { background: #052f35; }
+.sh-left-title { color: #b1ed0a; }
+.sh-left-tag { color: rgba(177,237,10,0.7); }
+
+/* ── SHERPA STATS ── */
+#sherpa-stats { background: #f0faf7; }
+.sherpa-stat-num { color: #035966; }
+.sherpa-stats-grid { border-color: #052f35; }
+.sherpa-stat-card { border-right-color: #052f35; }
+
+/* ── QUÉ ES ── */
+#que-es {
+  background-color: #f8fffe;
+  background-image: url('uploads/Que es sherpa base-0cf0b0d8.png');
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 50% auto;
+}
+.que-es-badge { background: #b1ed0a; color: #052f35; }
+.dimensiones-grid { background: #052f35; }
+.dimension-card { background: #f0faf7; }
+.dimension-card:hover { background: #e0f7f0; }
+.dimension-num { color: #31b498; }
+#que-es .dimension-icon svg rect,
+#que-es .dimension-icon svg path,
+#que-es .dimension-icon svg circle { stroke: #31b498; }
+#que-es .dimension-card:nth-child(even) .dimension-icon svg rect,
+#que-es .dimension-card:nth-child(even) .dimension-icon svg path,
+#que-es .dimension-card:nth-child(even) .dimension-icon svg circle { stroke: #035966; }
+#que-es .dimension-card:nth-child(even) .dimension-num { color: #035966; }
+
+/* ── CÓMO FUNCIONA ── */
+#como-funciona {
+  background-color: #052f35;
+  background-image: url('uploads/fondo 3.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.features-grid { border-color: rgba(177,237,10,0.15); }
+.feature-card {
+  border-right-color: rgba(177,237,10,0.15);
+  border-bottom-color: rgba(177,237,10,0.15);
+}
+.feature-card:hover { background: rgba(177,237,10,0.05); }
+.feature-num { color: #b1ed0a; }
+.feature-title { color: #FFFFFF; }
+
+/* ── PLATAFORMA ── */
+#plataforma { background: #021a1e; padding: 56px 48px; }
+.play-btn { border-color: #b1ed0a; color: #b1ed0a; }
+.video-placeholder:hover .play-btn { background: #b1ed0a; color: #052f35; }
+.video-placeholder:hover { border-color: #b1ed0a; }
+#plataforma .section-title { color: #FFFFFF; }
+#plataforma .video-placeholder { aspect-ratio: 21/6; }
+
+/* ── DIFERENCIADORES (nueva diagramación) ── */
+#diferenciadores {
+  padding: 100px 48px;
+  background-color: #f8fffe;
+  background-image: url('uploads/fondo 2.png');
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 40% auto;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: start;
+}
+.dif-header .section-title { font-size: clamp(40px, 5vw, 64px); }
+.dif-items { display: flex; flex-direction: column; border-top: 1px solid #052f35; }
+.dif-item {
+  display: grid; grid-template-columns: 80px 1fr; gap: 32px;
+  padding: 36px 0; border-bottom: 1px solid rgba(3,89,102,0.2);
+  align-items: start; cursor: default; transition: background 0.2s;
+}
+.dif-item:hover { background: rgba(177,237,10,0.04); }
+.dif-item-left { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding-top: 4px; }
+.dif-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; line-height: 1; color: #b1ed0a; letter-spacing: -0.02em; }
+.dif-line { width: 24px; height: 2px; background: rgba(3,89,102,0.3); }
+.dif-title { font-size: 22px; font-weight: 700; color: #052f35; margin-bottom: 10px; line-height: 1.2; }
+.dif-body { font-size: 15px; line-height: 1.7; color: var(--dark-gray); }
+@media (max-width: 768px) {
+  #diferenciadores { grid-template-columns: 1fr; gap: 40px; }
+  .dif-item { grid-template-columns: 56px 1fr; gap: 20px; }
+  .dif-num { font-size: 36px; }
+}
+
+/* ── RESULTADOS ── */
+#resultados { background: #035966; }
+.resultado-bar-fill { background: #b1ed0a; }
+.resultado-bar-fill.lav { background: #c7b5f3; }
+.resultado-card:nth-child(1) .resultado-pct,
+.resultado-card:nth-child(3) .resultado-pct { color: #b1ed0a; }
+.resultado-card:nth-child(2) .resultado-pct,
+.resultado-card:nth-child(4) .resultado-pct { color: #c7b5f3; }
+.resultado-bar { background: rgba(255,255,255,0.15); }
+
+/* ── EQUIPO ── */
+#equipo { background: #f0faf7; }
+.equipo-grid { border-top-color: #052f35; }
+.equipo-card { border-bottom-color: rgba(3,89,102,0.15); border-right-color: rgba(3,89,102,0.1); }
+.equipo-avatar { background: linear-gradient(135deg, #31b498, #035966); }
+
+/* ── FINAL CTA ── */
+#cta-final {
+  background-color: #b1ed0a;
+  background-image: url('uploads/fndo6.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+#cta-final .section-label { color: rgba(5,47,53,0.6); }
+#cta-final .cta-title { color: #052f35; }
+#cta-final .cta-title em { color: #035966; font-style: normal; }
+#cta-final .cta-body { color: rgba(5,47,53,0.8); }
+#cta-final .btn-cta { background: #052f35; color: #FFFFFF; }
+#cta-final .btn-cta:hover { background: #FFFFFF; color: #052f35; }
+#cta-final p[style] { color: rgba(5,47,53,0.6) !important; }
+
+/* ── MARQUEE 2: Sherpa lime ── */
+.marquee-strip:last-of-type {
+  background: #052f35;
+  border-top-color: rgba(177,237,10,0.2);
+  border-bottom-color: rgba(177,237,10,0.2);
+}
+.marquee-strip:last-of-type .marquee-item { color: #b1ed0a; }
+
+/* ── FOOTER ── */
+footer { background: #021a1e; border-top-color: rgba(177,237,10,0.1); }
+.footer-logo { color: #FFFFFF; }
+.footer-logo span { color: #b1ed0a; }
+.footer-tagline { color: rgba(255,255,255,0.45); }
+.footer-col h5 { color: rgba(177,237,10,0.5); }
+.footer-col ul li a { color: rgba(255,255,255,0.65); }
+.footer-col ul li a:hover { color: #b1ed0a; }
+.footer-col p { color: rgba(255,255,255,0.45); }
+.footer-bottom { border-top-color: rgba(177,237,10,0.1); }
+.footer-bottom p { color: rgba(255,255,255,0.25); }
+
+/* ── HERO co-brand lockup ── */
+.hero-lockup { margin: 24px 0 8px; }
+.hero-lockup-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  display: block; margin-bottom: 12px;
+}
+.hero-lockup-logos { display: flex; align-items: center; gap: 16px; }
+.hero-lockup-orenda {
+  font-family: 'Bebas Neue', sans-serif; font-size: 26px;
+  letter-spacing: 0.04em; color: #fff;
+}
+.hero-lockup-x { color: #b1ed0a; font-size: 22px; font-weight: 300; }
+.hero-lockup-sherpa { height: 34px; width: auto; display: block; }
+
+/* ── SHERPA DIVIDER bottom line — more visible ── */
+.sd3-h-bot {
+  font-weight: 600 !important;
+  font-size: clamp(16px, 1.6vw, 22px) !important;
+  color: rgba(255,255,255,0.85) !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* ── CTA lockup ── */
+.cta-lockup {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; letter-spacing: 0.04em; color: #052f35;
+}
+.cta-lockup span { color: #035966; margin: 0 2px; }
+
+/* ── ALIANZA OPERATIVA ── */
+#alianza {
+  background: #021a1e;
+  padding: 64px 48px;
+  text-align: center;
+}
+#alianza .section-label { color: rgba(177,237,10,0.6); margin-bottom: 16px; }
+.alianza-text {
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.45; color: #fff;
+  max-width: 760px; margin: 0 auto 36px;
+  font-weight: 300;
+}
+.alianza-text strong { font-weight: 700; color: #b1ed0a; }
+.alianza-logos {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+}
+.alianza-logo {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid rgba(177,237,10,0.4);
+  color: #b1ed0a; text-decoration: none;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 14px 24px;
+  transition: all 0.2s;
+}
+.alianza-logo:hover { background: #b1ed0a; color: #021a1e; border-color: #b1ed0a; }
+@media (max-width: 768px) {
+  #alianza { padding: 48px 24px; }
+}

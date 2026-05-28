@@ -1,0 +1,727 @@
+<!DOCTYPE html><html lang="es"><head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundación Orenda — Sherpa</title>
+<link rel="stylesheet" href="orenda.css">
+<link rel="stylesheet" href="orenda-brand.css">
+</head>
+<body>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" id="mobile-close">✕</button>
+  <a href="#mision">Orenda</a>
+  <a href="#sherpa">Sherpa</a>
+  <a href="#testimonios">Comunidad</a>
+  <a href="#cta-final">Contáctenos</a>
+  <a href="#cta-final" style="color:var(--peach)">Conviértete en Aliado</a>
+</div>
+
+<!-- ── NAV ── -->
+<nav id="nav" class="scrolled">
+  <a href="#" class="nav-logo">Orenda<span>·</span>Sherpa</a>
+  <ul class="nav-links">
+    <li><a href="#mision">Orenda</a></li>
+    <li><a href="#sherpa-hero">Sherpa</a></li>
+    <li><a href="#testimonios">Comunidad</a></li>
+    <li><a href="#cta-final">Contáctenos</a></li>
+    <li><a href="#">EN</a></li>
+  </ul>
+
+  <div class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-photo-hint"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-label">Fundación Orenda — Colombia</div>
+  <div class="hero-content hero-reveal">
+    <h1 class="hero-headline">Una oportunidad<br>puede cambiar<br><em>un destino.</em></h1>
+    <p class="hero-sub">Somos Fundación Orenda. Creamos Sherpa, el programa que prepara a jóvenes colombianos para la universidad y para la vida.</p>
+    <p class="hero-body">Acompañamiento académico, socioemocional, becas y mentoría — un camino integral desde el colegio hasta el primer empleo.</p>
+    <div class="hero-lockup">
+      <span class="hero-lockup-label">Una fundación · un programa</span>
+      <div class="hero-lockup-logos">
+        <span class="hero-lockup-orenda">Fundación Orenda</span>
+        <span class="hero-lockup-x">+</span>
+        <img src="uploads/logo.png" alt="Sherpa" class="hero-lockup-sherpa">
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a href="mailto:gerencia@f-orenda.org" class="btn-hero">Sé Aliado</a>
+      <a href="#sherpa-hero" class="btn-hero-sec">Conoce Sherpa ↓</a>
+    </div>
+
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+
+
+<!-- ── VIDEO ORENDA ── -->
+<section id="video-orenda" style="padding:0;background:#000;position:relative;">
+  <video id="orenda-video" autoplay="" muted="" playsinline="" loop="" style="width:100%;display:block;max-height:80vh;object-fit:cover;display:none;">
+  </video>
+  <!-- Placeholder mientras no hay video -->
+  <div id="orenda-video-placeholder" style="width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#021A2E 0%,#065275 50%,#04345A 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;" onclick="document.getElementById('orenda-video-placeholder').style.display='none'">
+    <div style="width:72px;height:72px;border-radius:50%;border:2px solid rgba(39,195,192,0.6);display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(39,195,192,0.8)">▶</div>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-family:'Instrument Sans',sans-serif">Video próximamente · ~45 segundos</p>
+  </div>
+  <!-- Sound toggle -->
+  <button id="orenda-sound-btn" onclick="toggleOrendaSound()" style="position:absolute;bottom:20px;right:20px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:8px 16px;font-size:12px;font-family:'Instrument Sans',sans-serif;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(4px);">🔇 Sonido</button>
+  <p style="position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,0.4);font-size:12px;letter-spacing:0.08em;font-family:'Instrument Sans',sans-serif;pointer-events:none;">Conoce a Fundación Orenda en 45 segundos.</p>
+  <script>
+    function toggleOrendaSound() {
+      var v = document.getElementById('orenda-video');
+      var btn = document.getElementById('orenda-sound-btn');
+      if (!v) return;
+      v.muted = !v.muted;
+      btn.textContent = v.muted ? '🔇 Sonido' : '🔊 Silenciar';
+    }
+    // Autoplay when entering viewport
+    var orendaObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        var v = document.getElementById('orenda-video');
+        if (!v || !v.src) return;
+        if (e.isIntersecting) v.play(); else v.pause();
+      });
+    }, { threshold: 0.3 });
+    var ov = document.getElementById('orenda-video');
+    if (ov) orendaObs.observe(ov);
+  </script>
+</section>
+
+
+<section id="mision">
+  <div class="mision-img reveal visible"></div>
+  <div class="reveal reveal-delay-1 visible">
+    <div class="section-label">NUESTRA ESENCIA</div>
+    <div class="mision-accent">✦</div>
+    <h2 class="section-title">Cada joven lleva<br>dentro una orenda.</h2>
+    <div class="mision-body">
+      <p>Una fuerza capaz de producir cambios mediante la intención y la acción para así transformar la realidad.</p>
+      <p>Nuestro propósito es ayudarle a descubrirla. Lo hacemos a través de educación, acompañamiento y mentoría — desde el colegio hasta el primer empleo.</p>
+    </div>
+    <div class="mision-quote">"Orenda" significa la fuerza interior que habita en cada ser humano.</div>
+  </div>
+</section>
+
+<!-- ── REALIDAD (talento sobra) ── -->
+<section id="sherpa-stats" style="background-color: rgb(177, 237, 10)">
+  <div class="reveal visible">
+    <div class="section-label">POR QUÉ EXISTE SHERPA</div>
+    <h2 class="section-title">En Colombia, el talento<br>sobra. Las oportunidades<br>para desarrollarlo, no.</h2>
+  </div>
+  <p style="font-size:16px;color:var(--dark-gray);max-width:540px;margin-bottom:48px" class="reveal reveal-delay-1 visible">Estos tres datos resumen la realidad que Sherpa se propone mejorar.</p>
+  <div class="sherpa-stats-grid">
+    <div class="sherpa-stat-card reveal visible">
+      <div class="sherpa-stat-num" data-target="4">4 de cada 10</div>
+      <div class="sherpa-stat-text"><strong>logran graduarse</strong><br>Jóvenes de estratos 1, 2 y 3 que ingresan a la universidad logran graduarse. (Spadies)</div>
+    </div>
+    <div class="sherpa-stat-card reveal reveal-delay-1 visible">
+      <div class="sherpa-stat-num" data-target="78">78<span style="font-size:0.4em"> puntos</span></div>
+      <div class="sherpa-stat-text"><strong>de brecha en el Saber 11</strong><br>De diferencia significativa entre colegios privados y públicos. (Saber 11: 2025)</div>
+    </div>
+    <div class="sherpa-stat-card reveal reveal-delay-2 visible">
+      <div class="sherpa-stat-num" data-target="28%">28%</div>
+      <div class="sherpa-stat-text"><strong>no estudia ni trabaja</strong><br>El 28% de los jóvenes entre 14 y 28 años está fuera del sistema educativo y laboral. (SPADIES 2022)</div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ── MODELO ── -->
+<section id="modelo">
+  <div class="modelo-intro reveal visible">
+    <div class="section-label">NUESTRO MODELO</div>
+    <h2 class="section-title">Del colegio al primer empleo:<br>Un camino con propósito.</h2>
+    <p>Guiamos a los jóvenes en cada etapa de su transformación, desde la preparación académica y emocional en grado 11 hasta su primera oportunidad laboral.</p>
+  </div>
+  <div class="pathway" style="grid-template-columns: repeat(4,1fr)">
+    <div class="pathway-step reveal visible">
+      <div class="pathway-dot"></div>
+      <h4>01 · Sherpa</h4>
+      <p style="font-size:11px;font-weight:700;color:var(--peach);margin-bottom:6px">Preparación académica y socioemocional</p>
+      <p>Plataforma educativa con IA, gamificación y mentoría humana para preparar la Prueba Saber 11 y el examen de admisión de la Universidad Nacional.</p>
+    </div>
+    <div class="pathway-step reveal reveal-delay-1 visible">
+      <div class="pathway-dot"></div>
+      <div class="pathway-arrow">→</div>
+      <h4>02 · Becas-Financiación</h4>
+      <p style="font-size:11px;font-weight:700;color:var(--peach);margin-bottom:6px">De estudio y manutención</p>
+      <p>Abrimos oportunidades en las mejores universidades de Colombia y en carreras con alto potencial profesional.</p>
+    </div>
+    <div class="pathway-step reveal reveal-delay-2 visible">
+      <div class="pathway-dot"></div>
+      <div class="pathway-arrow">→</div>
+      <h4>03 · Acompañamiento</h4>
+      <p style="font-size:11px;font-weight:700;color:var(--peach);margin-bottom:6px">Durante toda la carrera</p>
+      <p>Psicológico, académico y motivacional.</p>
+    </div>
+    <div class="pathway-step reveal reveal-delay-3 visible">
+      <div class="pathway-dot"></div>
+      <div class="pathway-arrow">→</div>
+      <h4>04 · Primer empleo</h4>
+      <p style="font-size:11px;font-weight:700;color:var(--peach);margin-bottom:6px">Preparación para el mundo laboral</p>
+      <p>Con su hoja de vida, entrevistas y conseguimos pasantías afines a su carrera.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── ADRIANA LEÓN ── -->
+<section id="fundadora">
+  <div class="fundadora-img reveal visible"></div>
+  <div class="reveal reveal-delay-1 visible">
+    <div class="section-label">QUIÉN ESTÁ DETRÁS</div>
+    <h2 class="section-title">Orenda nació del sueño<br>de una mujer que cree<br>en el poder transformador<br>de las oportunidades.</h2>
+    <div class="fundadora-quote-mark">“</div>
+    <p class="fundadora-quote">Creemos que el talento está en todas partes; las oportunidades, no. Por eso acompañamos a jóvenes a imaginar un futuro distinto y a construirlo con las herramientas que reciben hoy.</p>
+    <div class="fundadora-attribution">Adriana León · Fundadora y CEO, Fundación Orenda</div>
+    <p class="fundadora-bio">Senior Fellow Harvard Advanced Leadership Initiative. 20 años de carrera corporativa: mercadeo en Unilever, Quala y Varta, y CEO de Bretano Corp. Actualmente, miembro de juntas de Enseña por Colombia, Assist Scholars y EdAccessLab.</p>
+  </div>
+</section>
+
+
+
+<!-- ── ALIADOS ── -->
+<section id="aliados">
+  <div class="reveal visible">
+    <div class="section-label">ALIADOS</div>
+    <h2 class="section-title">Organizaciones que<br>confían en Orenda para<br>transformar Colombia.</h2>
+  </div>
+  <div class="aliados-grid reveal reveal-delay-1 visible">
+    <div class="aliado-item">Citi</div>
+    <div class="aliado-item">Crepes &amp; Waffles</div>
+    <div class="aliado-item">U. El Bosque</div>
+    <div class="aliado-item">Alianza Educativa</div>
+    <div class="aliado-item">Fund. Bancolombia</div>
+    <div class="aliado-item">Sabio Caldas</div>
+    <div class="aliado-item">U. Javeriana</div>
+    <div class="aliado-item">Esc. Col. Ingeniería</div>
+    <div class="aliado-item">DO-IT</div>
+  </div>
+</section>
+
+<!-- ── SHERPA DIVIDER ── -->
+<!-- ── SHERPA DIVIDER ── -->
+<section id="sherpa-divider">
+  <!-- SVG mountain layers — back to front -->
+  <div class="sd3-mountains">
+    <svg class="sd3-svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Background sky -->
+        <linearGradient id="sd3sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#010c0e"></stop>
+          <stop offset="60%" stop-color="#021a1e"></stop>
+          <stop offset="100%" stop-color="#031f24"></stop>
+        </linearGradient>
+        <!-- Mountain layers -->
+        <linearGradient id="sd3m0" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#073540" stop-opacity="0.5"></stop>
+          <stop offset="100%" stop-color="#031f24" stop-opacity="0.5"></stop>
+        </linearGradient>
+        <linearGradient id="sd3m1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#094050"></stop>
+          <stop offset="100%" stop-color="#031f24"></stop>
+        </linearGradient>
+        <linearGradient id="sd3m2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#063540"></stop>
+          <stop offset="100%" stop-color="#021a1e"></stop>
+        </linearGradient>
+        <linearGradient id="sd3m3" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#042830"></stop>
+          <stop offset="100%" stop-color="#010d10"></stop>
+        </linearGradient>
+        <linearGradient id="sd3m4" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#031e24"></stop>
+          <stop offset="100%" stop-color="#010d10"></stop>
+        </linearGradient>
+        <!-- Fog/mist overlay -->
+        <linearGradient id="sd3fog" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#021a1e" stop-opacity="0"></stop>
+          <stop offset="40%" stop-color="#021a1e" stop-opacity="0.45"></stop>
+          <stop offset="60%" stop-color="#021a1e" stop-opacity="0.55"></stop>
+          <stop offset="100%" stop-color="#021a1e" stop-opacity="0"></stop>
+        </linearGradient>
+        <!-- Lime glow on peak -->
+        <radialGradient id="sd3glow" cx="55%" cy="20%" r="30%">
+          <stop offset="0%" stop-color="#b1ed0a" stop-opacity="0.12"></stop>
+          <stop offset="100%" stop-color="#b1ed0a" stop-opacity="0"></stop>
+        </radialGradient>
+      </defs>
+
+      <!-- Sky -->
+      <rect width="1440" height="600" fill="url(#sd3sky)"></rect>
+
+      <!-- Stars -->
+      <circle cx="120" cy="40" r="1" fill="#b1ed0a" opacity="0.5"></circle>
+      <circle cx="280" cy="22" r="0.8" fill="#fff" opacity="0.3"></circle>
+      <circle cx="480" cy="35" r="1.2" fill="#fff" opacity="0.25"></circle>
+      <circle cx="650" cy="18" r="0.8" fill="#b1ed0a" opacity="0.35"></circle>
+      <circle cx="900" cy="28" r="1" fill="#fff" opacity="0.3"></circle>
+      <circle cx="1150" cy="15" r="1.2" fill="#b1ed0a" opacity="0.45"></circle>
+      <circle cx="1350" cy="38" r="0.8" fill="#fff" opacity="0.3"></circle>
+
+      <!-- Layer 0: very far, faint -->
+      <path d="M0,600 L0,350 C120,310 220,270 340,250 C460,230 540,240 620,225 C700,210 760,190 830,175 C900,160 970,165 1040,180 C1110,195 1180,215 1280,240 C1360,260 1410,280 1440,295 L1440,600Z" fill="url(#sd3m0)"></path>
+
+      <!-- Layer 1: back mountains -->
+      <path d="M0,600 L0,400 C80,370 170,340 260,320 C350,300 420,305 500,290 C580,275 640,255 700,238 C760,221 810,210 870,202 C930,194 990,200 1060,215 C1130,230 1190,250 1270,268 C1350,286 1410,305 1440,318 L1440,600Z" fill="url(#sd3m1)"></path>
+
+      <!-- Layer 2: mid mountains, main peak center-right -->
+      <path d="M0,600 L0,480 C60,455 130,435 200,418 C270,401 330,400 390,388 C450,376 500,360 555,342 C610,324 655,308 700,292 C745,276 783,262 820,248 C857,234 885,223 920,215 C955,207 990,208 1030,218 C1070,228 1105,245 1150,258 C1195,271 1240,278 1295,292 C1350,306 1405,325 1440,340 L1440,600Z" fill="url(#sd3m2)"></path>
+
+      <!-- Layer 3: closer mountains, tall peak left-center -->
+      <path d="M0,600 L0,540 C40,520 90,505 140,492 C190,479 235,475 280,465 C325,455 365,443 405,428 C445,413 480,396 515,378 C550,360 578,342 608,322 C638,302 663,282 690,262 C717,242 740,225 766,212 C792,199 816,195 845,200 C874,205 900,220 930,238 C960,256 992,278 1030,295 C1068,312 1110,323 1160,336 C1210,349 1265,362 1320,378 C1375,394 1415,412 1440,425 L1440,600Z" fill="url(#sd3m3)"></path>
+
+      <!-- Layer 4: foreground dark -->
+      <path d="M0,600 L0,570 C60,555 130,542 200,530 C270,518 330,512 390,502 C450,492 500,480 550,465 C600,450 645,433 690,415 C735,397 772,380 810,362 C848,344 880,328 915,315 C950,302 988,295 1030,295 C1072,295 1110,302 1155,315 C1200,328 1245,346 1295,362 C1345,378 1400,395 1440,408 L1440,600Z" fill="url(#sd3m4)"></path>
+
+      <!-- Lime peak accent -->
+      <path d="M845,200 L822,220 L832,224 L812,244 L848,234 L862,252 L868,232 L884,230 L860,200Z" fill="#b1ed0a" opacity="0.8"></path>
+
+      <!-- Lime glow -->
+      <ellipse cx="845" cy="210" rx="180" ry="100" fill="url(#sd3glow)"></ellipse>
+
+      <!-- Mist/fog band in center (where text lives) -->
+      <rect width="1440" height="600" fill="url(#sd3fog)"></rect>
+    </svg>
+  </div>
+
+  <!-- Centered text — overlapping the mountain layers -->
+  <div class="sd3-content reveal visible">
+    <div class="sd3-tag">
+</div>
+    <h2 class="sd3-headline">
+      <span class="sd3-h-top">Conoce</span>
+      <span class="sd3-h-mid"><img src="uploads/logo.png" alt="Sherpa" class="sd3-logo"></span>
+      <span class="sd3-h-bot">Y así comienza el camino.<br>Conoce nuestro programa estrella.</span>
+    </h2>
+    <a href="#sherpa-hero" class="sd3-cta">Conoce el programa ↗</a>
+  </div>
+</section>
+
+
+<!-- ── SHERPA HERO ── -->
+<section id="sherpa-hero">
+  <!-- Left: headline -->
+  <div class="sh-left reveal visible">
+    <div class="sh-left-tag">SHERPA · Un programa de Fundación Orenda</div>
+    <h2 class="sh-left-title"><img src="uploads/logo.png" alt="Sherpa" class="sh-left-logo"></h2>
+    <p class="sh-left-sub">Preparamos a los jóvenes para la universidad y para la vida.</p>
+    <p style="font-size:14px;color:rgba(255,255,255,0.55);margin-bottom:32px;line-height:1.6">Sherpa es una plataforma educativa con inteligencia artificial, gamificación y acompañamiento humano que prepara académica y socioemocionalmente a estudiantes de grado 11 para el Saber 11 y el examen de admisión a la Universidad Nacional.</p>
+    <a href="mailto:gerencia@f-orenda.org" class="sh-left-cta">Sé Aliado de Sherpa <span>↗</span></a>
+  </div>
+
+  <!-- Right: accordion -->
+  <div class="sh-accordion reveal reveal-delay-1 visible">
+    <div class="sh-acc-item sh-acc-open" data-acc="">
+      <button class="sh-acc-header">
+        <span>¿Quiénes somos?</span>
+        <span class="sh-acc-icon">−</span>
+      </button>
+      <div class="sh-acc-body">
+        <p>Somos un equipo interdisciplinario de expertos en educación, psicología, diseño instruccional y tecnología que desarrolló un modelo innovador de enseñanza por competencias.</p>
+        <a href="#que-es" class="sh-acc-link">→</a>
+      </div>
+    </div>
+    <div class="sh-acc-item" data-acc="">
+      <button class="sh-acc-header">
+        <span>Preparación para el Saber 11 y examen UNAL</span>
+        <span class="sh-acc-icon">+</span>
+      </button>
+      <div class="sh-acc-body">
+        <p>Plataforma educativa con IA, gamificación y mentoría humana. 19 semanas, 6 áreas de conocimiento, para preparar la Prueba Saber 11 y el examen de admisión a la Universidad Nacional.</p>
+        <a href="#como-funciona" class="sh-acc-link">→</a>
+      </div>
+    </div>
+    <div class="sh-acc-item sh-acc-lime" data-acc="">
+      <button class="sh-acc-header">
+        <span>Acompañamiento socioemocional</span>
+        <span class="sh-acc-icon">+</span>
+      </button>
+      <div class="sh-acc-body">
+        <p>SOS Emocional, nuestra IA de bienestar, acompaña al estudiante en el manejo de ansiedad, estrés y motivación. Porque prepararse también es un reto emocional.</p>
+        <a href="#que-es" class="sh-acc-link">→</a>
+      </div>
+    </div>
+    <div class="sh-acc-item sh-acc-dark" data-acc="">
+      <button class="sh-acc-header">
+        <span>Resultados medibles</span>
+        <span class="sh-acc-icon">+</span>
+      </button>
+      <div class="sh-acc-body">
+        <p>70% ingresa a la educación superior. 97% completa el programa. +78 puntos sobre la media nacional en Saber 11. Resultados reales, no promesas.</p>
+        <a href="#resultados" class="sh-acc-link">→</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VIDEO SHERPA ── -->
+<section id="video-sherpa" style="padding:0;background:#000;position:relative;">
+  <video id="sherpa-video" autoplay="" muted="" playsinline="" loop="" style="width:100%;display:block;max-height:80vh;object-fit:cover;display:none;"></video>
+  <div id="sherpa-video-placeholder" style="width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#052f35 0%,#035966 50%,#021a1e 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;" onclick="document.getElementById('sherpa-video-placeholder').style.display='none'">
+    <div style="width:72px;height:72px;border-radius:50%;border:2px solid rgba(177,237,10,0.6);display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(177,237,10,0.8)">▶</div>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-family:'Instrument Sans',sans-serif">Video próximamente · ~55 segundos</p>
+  </div>
+  <button id="sherpa-sound-btn" onclick="toggleSherpaSound()" style="position:absolute;bottom:20px;right:20px;background:rgba(0,0,0,0.6);border:1px solid rgba(177,237,10,0.35);color:#b1ed0a;padding:8px 16px;font-size:12px;font-family:'Instrument Sans',sans-serif;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(4px);">🔇 Sonido</button>
+  <p style="position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,0.4);font-size:12px;letter-spacing:0.08em;font-family:'Instrument Sans',sans-serif;pointer-events:none;">Conoce Sherpa en 55 segundos.</p>
+  <script>
+    function toggleSherpaSound() {
+      var v = document.getElementById('sherpa-video');
+      var btn = document.getElementById('sherpa-sound-btn');
+      if (!v) return;
+      v.muted = !v.muted;
+      btn.textContent = v.muted ? '🔇 Sonido' : '🔊 Silenciar';
+    }
+    var sherpaObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        var v = document.getElementById('sherpa-video');
+        if (!v || !v.src) return;
+        if (e.isIntersecting) v.play(); else v.pause();
+      });
+    }, { threshold: 0.3 });
+    var sv = document.getElementById('sherpa-video');
+    if (sv) sherpaObs.observe(sv);
+  </script>
+</section>
+
+<!-- ── QUÉ ES ── -->
+<section id="que-es" style="background-color: rgb(255, 255, 255); background-size: auto">
+  <div class="que-es-intro reveal visible">
+    <div class="section-label">QUÉ ES SHERPA</div>
+    <h2 class="section-title">Preparación integral<br>en 4 dimensiones.</h2>
+    <p style="font-size:17px;line-height:1.7;color:var(--dark-gray);margin-top:16px">Partimos de las debilidades reales de cada estudiante en el Saber 11 y examen de admisión de la UNAL y construimos un programa personalizado de 19 semanas que integra lo académico, lo socioemocional, lo vocacional y la autogestión.</p>
+  </div>
+  <div class="que-es-badge reveal reveal-delay-1 visible">⏱ 19 semanas · Virtual + sesiones presenciales</div>
+  <div class="dimensiones-grid">
+    <div class="dimension-card reveal visible">
+      <div class="dimension-num">01</div>
+      <div class="dimension-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="40" height="32" rx="2" stroke="#FF8F75" stroke-width="2"></rect>
+          <path d="M14 24h20M14 18h12M14 30h16" stroke="#FF8F75" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <h3 class="dimension-title">Habilidades académicas</h3>
+      <p class="dimension-body">Matemáticas, ciencias, lectura crítica, inglés y análisis de la imagen. Foco en las áreas donde cada estudiante muestra más brechas según simulacro de diagnóstico.</p>
+    </div>
+    <div class="dimension-card reveal reveal-delay-1 visible">
+      <div class="dimension-num">02</div>
+      <div class="dimension-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="18" stroke="#B5A3D8" stroke-width="2"></circle>
+          <path d="M16 28c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#B5A3D8" stroke-width="2" stroke-linecap="round"></path>
+          <circle cx="24" cy="18" r="3" fill="#B5A3D8"></circle>
+        </svg>
+      </div>
+      <h3 class="dimension-title">Preparación socioemocional</h3>
+      <p class="dimension-body">Manejo de ansiedad, motivación y resiliencia. Esencial para el examen, la carrera y la vida.</p>
+    </div>
+    <div class="dimension-card reveal visible">
+      <div class="dimension-num">03</div>
+      <div class="dimension-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 40L24 12l16 28H8z" stroke="#FF8F75" stroke-width="2" stroke-linejoin="round"></path>
+          <path d="M24 12v28" stroke="#FF8F75" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4"></path>
+        </svg>
+      </div>
+      <h3 class="dimension-title">Orientación vocacional</h3>
+      <p class="dimension-body">Autoconocimiento y exploración profesional para que cada estudiante tome decisiones informadas sobre su futuro.</p>
+    </div>
+    <div class="dimension-card reveal reveal-delay-1 visible">
+      <div class="dimension-num">04</div>
+      <div class="dimension-icon">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 36V20l12-8 12 8v16" stroke="#B5A3D8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <rect x="18" y="28" width="12" height="8" stroke="#B5A3D8" stroke-width="2"></rect>
+        </svg>
+      </div>
+      <h3 class="dimension-title">Autogestión y disciplina</h3>
+      <p class="dimension-body">Autorregulación y estudio autónomo a través de retos y experiencias calificadas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CÓMO FUNCIONA ── -->
+<section id="como-funciona" style="background-size: cover">
+  <div class="reveal visible">
+    <div class="section-label">TECNOLOGÍA AL SERVICIO DEL ESTUDIANTE</div>
+    <h2 class="section-title">La plataforma que<br>cierra brechas,<br>no las profundiza.</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal visible">
+      <div class="feature-num">01</div>
+      <h3 class="feature-title">Cápsulas + gamificación</h3>
+      <p class="feature-body">Retos cortos e interactivos que fortalecen el pensamiento crítico, la resolución de problemas y el hábito de estudio autónomo.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1 visible">
+      <div class="feature-num">02</div>
+      <h3 class="feature-title">Reportes individuales semanales</h3>
+      <p class="feature-body">Analítica personalizada que identifica fortalezas, dificultades y oportunidades de mejora para acompañar el progreso.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-2 visible">
+      <div class="feature-num">03</div>
+      <h3 class="feature-title">Sherpi · IA académico</h3>
+      <p class="feature-body">Asistente académico con IA que resuelve dudas, explica conceptos y genera recursos de aprendizaje en tiempo real 24/7.</p>
+    </div>
+    <div class="feature-card reveal visible">
+      <div class="feature-num">04</div>
+      <h3 class="feature-title">SOS Emocional · IA</h3>
+      <p class="feature-body">Compañero virtual que acompaña el bienestar emocional, detecta señales de riesgo y activa rutas de apoyo cuando es necesario.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1 visible">
+      <div class="feature-num">05</div>
+      <h3 class="feature-title">4 simulacros tipo Saber 11 y examen UNAL</h3>
+      <p class="feature-body">Experiencia alineada con los exámenes reales: temporizador, retroalimentación inmediata y análisis detallado por competencias para medir el avance.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-2 visible">
+      <div class="feature-num">06</div>
+      <h3 class="feature-title">Sesiones presenciales</h3>
+      <p class="feature-body">Acompañamiento humano que potencia la experiencia digital mediante interacción directa, resolución de dudas y práctica guiada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── PLATAFORMA ── -->
+<section id="plataforma">
+  <div class="reveal visible">
+    <div class="section-label">LA PLATAFORMA</div>
+    <h2 class="section-title" style="color:var(--white)">Así se ve Sherpa<br>por dentro.</h2>
+  </div>
+  <p class="plataforma-sub reveal reveal-delay-1 visible">Una experiencia diseñada para enganchar al estudiante y producir resultados medibles.</p>
+  <div class="video-placeholder reveal reveal-delay-2 visible">
+    <div class="play-btn">▶</div>
+    <p>PRÓXIMAMENTE: VIDEO DEMO INTERACTIVO DE LA PLATAFORMA</p>
+  </div>
+</section>
+
+<!-- ── DIFERENCIADORES ── -->
+<section id="diferenciadores" style="background-size: contain">
+  <div class="dif-header reveal visible">
+    <div class="section-label">LA DIFERENCIA</div>
+    <h2 class="section-title">Esto no es otro<br>curso pre-ICFES.</h2>
+    <p style="font-size:16px;line-height:1.65;color:var(--dark-gray);margin-top:16px;max-width:380px">Sherpa no solo prepara estudiantes para un examen: desarrolla las competencias, hábitos y mentalidad que impulsan su futuro.</p>
+  </div>
+  <div class="dif-items">
+    <div class="dif-item reveal visible">
+      <div class="dif-item-left">
+        <span class="dif-num">01</span>
+        <div class="dif-line"></div>
+      </div>
+      <div class="dif-item-right">
+        <h3 class="dif-title">Construido sobre debilidades reales</h3>
+        <p class="dif-body">Parte del simulacro de diagnóstico y el nivel de dificultad es progresivo.</p>
+      </div>
+    </div>
+    <div class="dif-item reveal reveal-delay-1 visible">
+      <div class="dif-item-left">
+        <span class="dif-num">02</span>
+        <div class="dif-line"></div>
+      </div>
+      <div class="dif-item-right">
+        <h3 class="dif-title">Prepara para la universidad y la vida</h3>
+        <p class="dif-body">Desarrolla pensamiento crítico, disciplina y habilidades socioemocionales que trascienden el examen.</p>
+      </div>
+    </div>
+    <div class="dif-item reveal reveal-delay-2 visible">
+      <div class="dif-item-left">
+        <span class="dif-num">03</span>
+        <div class="dif-line"></div>
+      </div>
+      <div class="dif-item-right">
+        <h3 class="dif-title">Diseño instruccional de talla mundial</h3>
+        <p class="dif-body">Metodología creada por expertos formados en Harvard, NYU, la Universidad de los Andes, UNAL y U. Distrital.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESULTADOS ── -->
+<section id="resultados">
+  <div class="reveal visible">
+    <div class="section-label">RESULTADOS</div>
+    <h2 class="section-title">Los números<br>que importan.</h2>
+  </div>
+  <p class="impacto-sub reveal reveal-delay-1 visible">Resultados reales de jóvenes que transformaron su futuro con Sherpa.</p>
+  <div class="impacto-grid">
+    <div class="stat-card reveal visible">
+      <div class="stat-number" data-target="70%">70%</div>
+      <div class="stat-label">ingresa a la educación superior.</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-1 visible">
+      <div class="stat-number lav" data-target="97%">97%</div>
+      <div class="stat-label">completan el programa.</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-2 visible">
+      <div class="stat-number" data-target="+78">+78</div>
+      <div class="stat-label">puntos sobre la media nacional en Saber 11.</div>
+    </div>
+    <div class="stat-card reveal visible">
+      <div class="stat-number lav" data-target="+20">+20</div>
+      <div class="stat-label">becados de estudio y manutención en universidades de alta calidad.</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-1 visible">
+      <div class="stat-number" data-target="+430">+430</div>
+      <div class="stat-label">jóvenes han participado en nuestros programas.</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-2 visible">
+      <div class="stat-number lav" data-target="100%">100%</div>
+      <div class="stat-label">recomienda Sherpa a otros estudiantes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIOS + CARRERAS ── -->
+<section id="testimonios">
+  <div class="reveal visible">
+    <div class="section-label">VIDAS TRANSFORMADAS</div>
+    <h2 class="section-title">Donde los sueños<br>se vuelven realidad.</h2>
+    <p style="font-size:17px;color:var(--dark-gray);max-width:520px;margin-top:16px;line-height:1.6">Jóvenes que hoy están construyendo un futuro que antes parecía inalcanzable.</p>
+  </div>
+  <div class="testimonios-grid">
+    <div class="testimonio-card reveal visible">
+      <div class="testimonio-accent">❝</div>
+      <p class="testimonio-text">Gracias a Sherpa encontré estrategias para desempeñarme mejor en muchas áreas de mi vida.</p>
+      <div class="testimonio-avatar"></div>
+      <div class="testimonio-name">Hanna López</div>
+      <div class="testimonio-role">Ing. Mecánica · Escuela Col. de Ingeniería</div>
+    </div>
+    <div class="testimonio-card reveal reveal-delay-1 visible">
+      <div class="testimonio-accent">❝</div>
+      <p class="testimonio-text">Esta beca fue un voto de confianza en mí — la prueba de que alguien creyó en mi capacidad como estudiante.</p>
+      <div class="testimonio-avatar" style="background:linear-gradient(135deg,#31b498,#035966)"></div>
+      <div class="testimonio-name">Yemmy Tatiana Rivera</div>
+      <div class="testimonio-role">Ing. Civil · U. Javeriana</div>
+    </div>
+    <div class="testimonio-card reveal reveal-delay-2 visible">
+      <div class="testimonio-accent">❝</div>
+      <p class="testimonio-text">Estoy cumpliendo una promesa conmigo mismo. Celebramos el triunfo de ser el primer abogado de la familia.</p>
+      <div class="testimonio-avatar" style="background:linear-gradient(135deg,#c7b5f3,#035966)"></div>
+      <div class="testimonio-name">Juan Diego García</div>
+      <div class="testimonio-role">Derecho · U. Sto. Tomás Villavicencio</div>
+    </div>
+  </div>
+  <div class="reveal visible" style="margin-top:64px">
+    <div class="section-label" style="margin-bottom:24px">ALGUNAS DE LAS CARRERAS QUE ESTÁN CONSTRUYENDO</div>
+    <div class="carreras-grid">
+      <div class="carrera-item"><h4>Derecho</h4><span>Pontificia Universidad Javeriana</span></div>
+      <div class="carrera-item"><h4>Ing. Industrial</h4><span>Pontificia Universidad Javeriana</span></div>
+      <div class="carrera-item"><h4>Ing. de Sistemas</h4><span>Pontificia Universidad Javeriana</span></div>
+      <div class="carrera-item"><h4>Enfermería</h4><span>Pontificia Universidad Javeriana</span></div>
+      <div class="carrera-item"><h4>Medicina</h4><span>Universidad Militar</span></div>
+      <div class="carrera-item"><h4>Ing. Industrial</h4><span>Universidad El Bosque</span></div>
+      <div class="carrera-item"><h4>Ing. Civil</h4><span>Escuela Colombiana de Ingeniería</span></div>
+      <div class="carrera-item"><h4>Derecho</h4><span>U. Santo Tomás Villavicencio</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="equipo">
+  <div class="eq-hero">
+    <!-- Left: active member info -->
+    <div class="eq-left">
+      <div class="eq-bg" id="eq-bg" style="opacity: 1; background: url(&quot;https://images.squarespace-cdn.com/content/v1/68c444cbeeb1356ce3c873a3/c556d906-3387-4c02-9203-612177f7b598/Adriana-leo%CC%81n.webp&quot;) center top / cover no-repeat; filter: brightness(0.45);"></div>
+      <div class="eq-overlay"></div>
+      <div class="eq-left-content">
+        <div class="section-label eq-label">NUESTRO EQUIPO</div>
+        <div class="eq-role" id="eq-role" style="opacity: 1;">Fundadora</div>
+        <h2 class="eq-name" id="eq-name" style="opacity: 1;">Adriana<br>León</h2>
+        <p class="eq-bio" id="eq-bio" style="opacity: 1;">Directora Fundación Orenda. 20 años de carrera corporativa. Senior Fellow Harvard Advanced Leadership Initiative.</p>
+      </div>
+    </div>
+
+    <!-- Right: scrollable cards -->
+    <div class="eq-right">
+      <div class="eq-cards-wrap">
+        <div class="eq-cards" id="eq-cards"><div class="eq-card"><div class="eq-card-img" style="background:#035966"><div class="eq-card-initials">MA</div></div><div class="eq-card-info"><div class="eq-card-role">Ph.D Teaching Learning · NYU</div><div class="eq-card-name">María Angela Crane</div></div></div><div class="eq-card"><div class="eq-card-img" style="background:#052f35"><div class="eq-card-initials">LS</div></div><div class="eq-card-info"><div class="eq-card-role">Magíster en Educación · U. Nacional</div><div class="eq-card-name">Lisbeth Sierra</div></div></div><div class="eq-card eq-card-active"><div class="eq-card-img" style="background:url(https://images.squarespace-cdn.com/content/v1/68c444cbeeb1356ce3c873a3/c556d906-3387-4c02-9203-612177f7b598/Adriana-leo%CC%81n.webp) center center/cover no-repeat;"></div><div class="eq-card-info"><div class="eq-card-role">Harvard ALI Senior Fellow</div><div class="eq-card-name">Adriana León</div></div></div><div class="eq-card"><div class="eq-card-img" style="background:#074a3d"><div class="eq-card-initials">OB</div></div><div class="eq-card-info"><div class="eq-card-role">Maestría Matemáticas · PhD NYU</div><div class="eq-card-name">Oscar Bernal</div></div></div><div class="eq-card"><div class="eq-card-img" style="background:#035966"><div class="eq-card-initials">EG</div></div><div class="eq-card-info"><div class="eq-card-role">Magíster Innovación y Tecnología</div><div class="eq-card-name">Estefanía Gaviria</div></div></div><div class="eq-card"><div class="eq-card-img" style="background:#052f35"><div class="eq-card-initials">TF</div></div><div class="eq-card-info"><div class="eq-card-role">Licenciada en Química · U. Distrital</div><div class="eq-card-name">Tatiana Forero</div></div></div><div class="eq-card"><div class="eq-card-img" style="background:#0b6b4a"><div class="eq-card-initials">MG</div></div><div class="eq-card-info"><div class="eq-card-role">IA y Ciencia de Datos</div><div class="eq-card-name">Martín Gil</div></div></div><div class="eq-card"><div class="eq-card-img" style="background:#035966"><div class="eq-card-initials">IG</div></div><div class="eq-card-info"><div class="eq-card-role">IA, Automatización y Psicología</div><div class="eq-card-name">Iñigo Gutiérrez</div></div></div><div class="eq-card"><div class="eq-card-img" style="background:#052f35"><div class="eq-card-initials">RS</div></div><div class="eq-card-info"><div class="eq-card-role">Implementación de Plataforma</div><div class="eq-card-name">Ricardo Scarglioni</div></div></div><div class="eq-card"><div class="eq-card-img" style="background:#074a3d"><div class="eq-card-initials">MM</div></div><div class="eq-card-info"><div class="eq-card-role">Dirección de Proyectos y Arquitectura</div><div class="eq-card-name">Manuel Mercado</div></div></div></div>
+      </div>
+      <div class="eq-nav">
+        <button class="eq-btn" id="eq-prev">‹</button>
+        <button class="eq-btn" id="eq-next">›</button>
+        <div class="eq-counter"><span id="eq-cur">03</span> / <span id="eq-tot">10</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA FINAL ── -->
+<section id="cta-final">
+  <div class="reveal visible">
+    <h2 class="cta-title">Tu empresa puede<br>cambiar el rumbo<br><em style="font-style:normal">de una vida.</em></h2>
+  </div>
+  <div class="reveal reveal-delay-1 visible">
+    <p class="cta-body">Tu apoyo permite que más jóvenes recorran el camino completo: del colegio a la universidad y al empleo.</p>
+    <a href="mailto:gerencia@f-orenda.org" class="btn-cta">Hablemos <span class="arrow">↗</span></a>
+    <div style="margin-top:40px;padding-top:32px;border-top:1px solid rgba(5,47,53,0.2)">
+      <div class="cta-lockup">Orenda<span>•</span>Sherpa</div>
+      <p style="font-size:14px;color:rgba(5,47,53,0.7);margin-top:8px;max-width:380px;line-height:1.5">Transformando talento en oportunidades de vida para impulsar la movilidad social.</p>
+      <p style="font-size:13px;color:rgba(5,47,53,0.6);margin-top:16px">gerencia@f-orenda.org · +57 (311) 204-9466 · Bogotá, Colombia</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── ALIANZA OPERATIVA ── -->
+<section id="alianza">
+  <div class="alianza-inner reveal visible">
+    <div class="section-label">OPERADO EN ALIANZA CON</div>
+    <p class="alianza-text">Sherpa es operado en alianza con <strong>Enseña por Colombia</strong>, parte de la red global <strong>Teach For All</strong>.</p>
+    <div class="alianza-logos">
+      <a href="https://ensenaporcolombia.org" target="_blank" rel="noopener" class="alianza-logo">Enseña por Colombia ↗</a>
+      <a href="https://teachforall.org" target="_blank" rel="noopener" class="alianza-logo">Teach For All ↗</a>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Orenda<span>·</span>Sherpa</div>
+      <p class="footer-tagline">Transformando el futuro de jóvenes colombianos a través de la educación, el acompañamiento y la mentoría.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navegación</h5>
+      <ul>
+        <li><a href="#mision">Orenda</a></li>
+        <li><a href="#sherpa-hero">Sherpa</a></li>
+        <li><a href="#testimonios">Comunidad</a></li>
+        <li><a href="#cta-final">Contáctenos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Programa</h5>
+      <ul>
+        <li><a href="#que-es">Qué es Sherpa</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#resultados">Resultados</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contacto</h5>
+      <p>+57 (311) 204-9466<br>gerencia@f-orenda.org<br>Bogotá, Colombia</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Fundación Orenda. Todos los derechos reservados.</p>
+    <p>Hecho con propósito en Colombia 🇨🇴</p>
+  </div>
+</footer>
+
+<script src="orenda.js"></script>
+
+
+</body></html>
