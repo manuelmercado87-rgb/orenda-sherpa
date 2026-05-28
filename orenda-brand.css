@@ -262,6 +262,18 @@
 .dif-title { font-size: 22px; font-weight: 700; color: #052f35; margin-bottom: 10px; line-height: 1.2; }
 .dif-body { font-size: 15px; line-height: 1.7; color: var(--dark-gray); }
 @media (max-width: 768px) {
+  #que-es { background-size: 150% auto; background-position: top -40px right -60px; }
+  #que-es .que-es-intro, #que-es .que-es-badge, #que-es .dimensiones-grid { position: relative; z-index: 2; }
+  #que-es::before {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(248,255,254,0.82) 0%, rgba(248,255,254,0.92) 55%, #f8fffe 100%);
+    pointer-events: none;
+  }
+  #que-es { position: relative; }
+  #diferenciadores { background-size: 90% auto; background-position: bottom -20px left -40px; }
+  #cta-final { background-size: cover; }
+}
+@media (max-width: 768px) {
   #diferenciadores { grid-template-columns: 1fr; gap: 40px; }
   .dif-item { grid-template-columns: 56px 1fr; gap: 20px; }
   .dif-num { font-size: 36px; }
