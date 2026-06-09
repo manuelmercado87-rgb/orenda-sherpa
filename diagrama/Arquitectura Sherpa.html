@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquitectura de la plataforma Sherpa</title>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Sherpa brand palette (Manual de Marca, cap. 3) */
+    --petrol:#052f35;
+    --teal:#035966;
+    --mint:#31b498;
+    --lima:#b1ed0a;
+    --lavanda:#c7b5f3;
+
+    --ink:#052f35;
+    --paper:#f4f6f4;
+
+    /* Per-layer color systems: border / strong text / soft text / tint fill */
+    --core-bd:#035966;   --core-tx:#03363d;  --core-sf:#0a6373;  --core-fill:#e7f0f1;  --core-band:#dceaeb;
+    --content-bd:#1f9e80;--content-tx:#0c5d4a;--content-sf:#16876b;--content-fill:#e3f6ef;--content-band:#d6f0e6;
+    --ai-bd:#9684db;     --ai-tx:#473a7e;    --ai-sf:#6a59b0;    --ai-fill:#efeaff;    --ai-band:#e7e0fb;
+    --game-bd:#7fae04;   --game-tx:#3e5600;  --game-sf:#5d7d04;  --game-fill:#f1fad6;  --game-band:#e8f6c3;
+    --ana-bd:#23545c;    --ana-tx:#052f35;   --ana-sf:#2d5a62;   --ana-fill:#e4ecec;   --ana-band:#d6e2e2;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:"General Sans",-apple-system,system-ui,sans-serif;
+    background:
+      radial-gradient(120% 90% at 50% -10%, #0a4049 0%, #052f35 55%, #03242a 100%);
+    color:var(--ink);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    min-height:100%;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* ---- stage scales the fixed-width poster to fit ---- */
+  #stage{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    padding:36px 24px 64px;
+  }
+  #scaler{transform-origin:top center;}
+
+  .poster{
+    width:820px;
+    background:var(--paper);
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 40px 90px -30px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
+    position:relative;
+  }
+
+  /* ===== HEADER ===== */
+  header.hdr{
+    background:var(--petrol);
+    color:#fff;
+    padding:30px 40px 28px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hdr .grain{
+    position:absolute;inset:0;
+    background:radial-gradient(70% 130% at 88% -20%, rgba(177,237,10,.16), transparent 60%);
+    pointer-events:none;
+  }
+  .logo-mark{
+    display:block;position:relative;
+    width:108px;height:auto;
+    margin-bottom:22px;
+  }
+  .hdr-titles{position:relative;min-width:0;}
+  .eyebrow{
+    font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--lima);
+    margin-bottom:7px;
+  }
+  .hdr-titles h1{
+    font-size:30px;font-weight:600;line-height:1.04;letter-spacing:-.015em;
+    color:#fff;
+  }
+  .hdr-titles p{
+    margin-top:8px;font-size:14px;font-weight:400;line-height:1.4;
+    color:rgba(255,255,255,.7);max-width:560px;
+  }
+  .hdr-meta{
+    position:relative;
+    margin-top:22px;display:flex;gap:26px;flex-wrap:wrap;
+    padding-top:18px;border-top:1px solid rgba(255,255,255,.12);
+  }
+  .hdr-meta .m{display:flex;flex-direction:column;gap:2px;}
+  .hdr-meta .m .k{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);}
+  .hdr-meta .m .v{font-size:14px;font-weight:500;color:#fff;}
+  .hdr-meta .m .v b{color:var(--mint);font-weight:600;}
+
+  /* ===== LEGEND (interactive) ===== */
+  .legend{
+    display:flex;flex-wrap:wrap;gap:8px;
+    padding:16px 40px;
+    background:#eef1ee;
+    border-bottom:1px solid #e0e4df;
+  }
+  .legend .lg-label{
+    font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:#7a857d;align-self:center;margin-right:4px;
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 13px 7px 10px;border-radius:999px;
+    background:#fff;border:1px solid #dfe3de;
+    font-size:12.5px;font-weight:500;color:#3a463e;
+    cursor:pointer;user-select:none;
+    transition:transform .12s ease, box-shadow .15s ease, opacity .15s ease, border-color .15s ease;
+  }
+  .chip .dot{width:11px;height:11px;border-radius:4px;flex:0 0 auto;}
+  .chip:hover{transform:translateY(-1px);box-shadow:0 4px 12px -6px rgba(0,0,0,.3);}
+  .chip[aria-pressed="true"]{border-color:var(--petrol);box-shadow:0 0 0 1.5px var(--petrol) inset;}
+  body.has-focus .chip:not([aria-pressed="true"]){opacity:.5;}
+
+  /* ===== DIAGRAM ===== */
+  .diagram{position:relative;padding:28px 40px 16px;}
+  svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible;}
+
+  .layer{position:relative;z-index:2;margin-bottom:22px;}
+  .layer:last-child{margin-bottom:6px;}
+  .layer-head{display:flex;align-items:center;gap:12px;margin-bottom:13px;}
+  .layer-head .lh-title{
+    font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:#6f7a72;white-space:nowrap;
+  }
+  .layer-head .lh-tag{
+    font-size:11px;font-weight:500;color:#9aa39c;white-space:nowrap;
+  }
+  .layer-head .rule{flex:1 1 auto;height:1px;background:linear-gradient(90deg,#d3d8d2,transparent);}
+  .layer-head .lh-dot{width:9px;height:9px;border-radius:3px;flex:0 0 auto;}
+
+  .row{display:grid;gap:14px;}
+  .row.c4{grid-template-columns:repeat(4,1fr);}
+  .row.c3{grid-template-columns:repeat(3,1fr);}
+  .row.c2{grid-template-columns:repeat(2,1fr);}
+
+  /* node cards */
+  .node{
+    border-radius:13px;
+    padding:13px 15px;
+    background:var(--n-fill,#fff);
+    border:1px solid var(--n-bd,#dde2dd);
+    position:relative;
+    transition:transform .14s ease, box-shadow .18s ease, opacity .18s ease;
+    min-height:58px;
+    display:flex;flex-direction:column;justify-content:center;gap:3px;
+  }
+  .node::before{
+    content:"";position:absolute;left:0;top:13px;bottom:13px;width:3px;border-radius:3px;
+    background:var(--n-bd,#dde2dd);
+  }
+  .node .nt{font-size:14.5px;font-weight:600;line-height:1.15;color:var(--n-tx,#1f2a22);letter-spacing:-.01em;}
+  .node .ns{font-size:11.5px;font-weight:400;line-height:1.3;color:var(--n-sf,#6b756d);}
+  .node:hover{transform:translateY(-2px);box-shadow:0 10px 22px -12px rgba(5,47,53,.45);}
+
+  /* container layers (Moodle, Mochila) */
+  .container-box{
+    border:1.5px dashed var(--cb-bd,#bcd2cf);
+    border-radius:16px;
+    background:var(--cb-bg,rgba(3,89,102,.04));
+    padding:14px 16px 16px;
+    position:relative;
+  }
+  .container-box .cb-cap{
+    text-align:center;font-size:11.5px;font-weight:500;color:#8a948c;margin-top:13px;
+  }
+  .container-box .cb-badge{
+    position:absolute;top:-10px;left:18px;
+    background:var(--paper);padding:0 9px;
+    font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--cb-bd,#3a8c84);
+    display:flex;align-items:center;gap:6px;white-space:nowrap;
+  }
+  .container-box .cb-badge .dot{width:8px;height:8px;border-radius:50%;}
+
+  /* color systems applied to nodes */
+  .core    {--n-bd:var(--core-bd);--n-tx:var(--core-tx);--n-sf:var(--core-sf);--n-fill:var(--core-fill);}
+  .content {--n-bd:var(--content-bd);--n-tx:var(--content-tx);--n-sf:var(--content-sf);--n-fill:var(--content-fill);}
+  .ai      {--n-bd:var(--ai-bd);--n-tx:var(--ai-tx);--n-sf:var(--ai-sf);--n-fill:var(--ai-fill);}
+  .game    {--n-bd:var(--game-bd);--n-tx:var(--game-tx);--n-sf:var(--game-sf);--n-fill:var(--game-fill);}
+  .ana     {--n-bd:var(--ana-bd);--n-tx:var(--ana-tx);--n-sf:var(--ana-sf);--n-fill:var(--ana-fill);}
+
+  .ai-primary{min-height:64px;}
+  .ai-primary .nt{font-size:14px;}
+
+  /* dim non-focused layers */
+  body.has-focus .layer[data-dim="true"]{opacity:.22;filter:saturate(.5);}
+  body.has-focus .layer[data-dim="true"] .node:hover{transform:none;box-shadow:none;}
+
+  /* footer */
+  footer.ftr{
+    padding:18px 40px 26px;
+    display:flex;justify-content:space-between;align-items:center;gap:20px;
+    border-top:1px solid #e3e7e2;flex-wrap:wrap;
+  }
+  footer.ftr .ft-note{font-size:11.5px;color:#8a948c;max-width:560px;line-height:1.4;}
+  footer.ftr .ft-brand{font-size:12px;font-weight:600;color:var(--teal);letter-spacing:.02em;display:flex;align-items:center;gap:8px;}
+  footer.ftr .ft-brand .iso{
+    width:18px;height:18px;border-radius:5px;
+    background:conic-gradient(from 200deg, var(--teal), var(--mint), var(--lima));
+    display:inline-block;
+  }
+
+  @media print{
+    body{background:#fff;}
+    #stage{padding:0;}
+    #scaler{transform:none !important;}
+    .poster{box-shadow:none;border-radius:0;width:820px;}
+    .chip{cursor:default;}
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="scaler">
+    <div class="poster" id="poster">
+
+      <!-- HEADER -->
+      <header class="hdr">
+        <div class="grain"></div>
+        <img class="logo-mark" src="sherpa-logo.png" alt="Sherpa">
+        <div class="hdr-titles">
+          <div class="eyebrow">Arquitectura de plataforma</div>
+          <h1>Cómo funciona Sherpa</h1>
+          <p>Vista operativa one-page — todos los componentes tecnológicos y cómo se conectan para llevar a cada estudiante a la cima.</p>
+        </div>
+        <div class="hdr-meta">
+          <div class="m"><span class="k">Núcleo</span><span class="v">Moodle LMS <b>+ AWS</b></span></div>
+          <div class="m"><span class="k">Inteligencia</span><span class="v">OpenAI <b>GPT-4o</b></span></div>
+          <div class="m"><span class="k">Cohorte</span><span class="v">Grado 11 · <b>19 semanas</b></span></div>
+          <div class="m"><span class="k">Canal</span><span class="v">WhatsApp <b>Business API</b></span></div>
+        </div>
+      </header>
+
+      <!-- LEGEND -->
+      <div class="legend" id="legend">
+        <span class="lg-label">Capas</span>
+        <button class="chip" data-layer="core"    aria-pressed="false"><span class="dot" style="background:var(--core-bd)"></span>Moodle / usuarios</button>
+        <button class="chip" data-layer="content" aria-pressed="false"><span class="dot" style="background:var(--content-bd)"></span>Contenidos</button>
+        <button class="chip" data-layer="ai"      aria-pressed="false"><span class="dot" style="background:var(--ai-bd)"></span>Inteligencia artificial</button>
+        <button class="chip" data-layer="game"    aria-pressed="false"><span class="dot" style="background:var(--game-bd)"></span>Gamificación / WhatsApp</button>
+        <button class="chip" data-layer="ana"     aria-pressed="false"><span class="dot" style="background:var(--ana-bd)"></span>Analítica</button>
+      </div>
+
+      <!-- DIAGRAM -->
+      <div class="diagram" id="diagram">
+        <svg class="wires" id="wires" aria-hidden="true"></svg>
+
+        <!-- ACTORES -->
+        <section class="layer" data-layer="core">
+          <div class="layer-head">
+            <span class="lh-dot" style="background:var(--core-bd)"></span>
+            <span class="lh-title">Actores</span>
+            <span class="lh-tag">quiénes usan la plataforma</span>
+            <span class="rule"></span>
+          </div>
+          <div class="row c4">
+            <div class="node core" id="a-estudiante"><span class="nt">Estudiante</span><span class="ns">Grado 11 — colegio público</span></div>
+            <div class="node core" id="a-sherpi"><span class="nt">Sherpi / ExC</span><span class="ns">Acompañante y tutor</span></div>
+            <div class="node core" id="a-coordinador"><span class="nt">Coordinador</span><span class="ns">Colegio / institución</span></div>
+            <div class="node core" id="a-admin"><span class="nt">Admin Orenda</span><span class="ns">Configuración y contenido</span></div>
+          </div>
+        </section>
+
+        <!-- NÚCLEO MOODLE -->
+        <section class="layer" data-layer="core">
+          <div class="layer-head">
+            <span class="lh-dot" style="background:var(--core-bd)"></span>
+            <span class="lh-title">Núcleo — Moodle LMS</span>
+            <span class="rule"></span>
+          </div>
+          <div class="container-box" id="moodle-box" style="--cb-bd:var(--core-bd);--cb-bg:var(--core-fill);">
+            <span class="cb-badge" style="color:var(--core-tx)"><span class="dot" style="background:var(--core-bd)"></span>Plataforma central</span>
+            <div class="row c4">
+              <div class="node core" id="m-usuarios"><span class="nt">Usuarios y roles</span><span class="ns">Estudiante, tutor, admin</span></div>
+              <div class="node core" id="m-cursos"><span class="nt">Cursos y cápsulas</span><span class="ns">6 áreas — 19 semanas</span></div>
+              <div class="node core" id="m-simulacros"><span class="nt">Simulacros</span><span class="ns">Semanas 1, 6, 12, 19</span></div>
+              <div class="node core" id="m-metricas"><span class="nt">Mis métricas</span><span class="ns">Plugin de analítica</span></div>
+            </div>
+            <div class="cb-cap">Moodle desplegado en AWS — EC2 · RDS · S3</div>
+          </div>
+        </section>
+
+        <!-- CONTENIDOS -->
+        <section class="layer" data-layer="content">
+          <div class="layer-head">
+            <span class="lh-dot" style="background:var(--content-bd)"></span>
+            <span class="lh-title">Contenidos y recursos</span>
+            <span class="lh-tag">de dónde sale el material</span>
+            <span class="rule"></span>
+          </div>
+          <div class="row c4">
+            <div class="node content" id="c-vimeo"><span class="nt">Vimeo</span><span class="ns">Videos privados</span></div>
+            <div class="node content" id="c-h5p"><span class="nt">H5P</span><span class="ns">Contenido interactivo</span></div>
+            <div class="node content" id="c-s3"><span class="nt">AWS S3</span><span class="ns">Documentos y archivos</span></div>
+            <div class="node content" id="c-pdf"><span class="nt">PDF / PPT</span><span class="ns">Materiales descargables</span></div>
+          </div>
+        </section>
+
+        <!-- IA -->
+        <section class="layer" data-layer="ai">
+          <div class="layer-head">
+            <span class="lh-dot" style="background:var(--ai-bd)"></span>
+            <span class="lh-title">Inteligencia artificial</span>
+            <span class="lh-tag">acompañamiento y personalización</span>
+            <span class="rule"></span>
+          </div>
+          <div class="row c2" style="margin-bottom:14px;">
+            <div class="node ai ai-primary" id="ai-eco"><span class="nt">Sherpi / Eco — agente académico</span><span class="ns">OpenAI GPT-4o-mini · resúmenes, dudas, recomendaciones</span></div>
+            <div class="node ai ai-primary" id="ai-amigo"><span class="nt">SherpiAmigo — agente socioemocional</span><span class="ns">GPT-4o · modelo MaCrane · 10 ejes temáticos</span></div>
+          </div>
+          <div class="row c3">
+            <div class="node ai" id="ai-raice"><span class="nt">RAICE</span><span class="ns">Alertas de riesgo estudiantil</span></div>
+            <div class="node ai" id="ai-abismo"><span class="nt">Paso al Abismo</span><span class="ns">Recuperación tras simulacro</span></div>
+            <div class="node ai" id="ai-banco"><span class="nt">Banco de preguntas</span><span class="ns">108 ítems Saber 11 y UNAL</span></div>
+          </div>
+        </section>
+
+        <!-- GAMIFICACIÓN -->
+        <section class="layer" data-layer="game">
+          <div class="layer-head">
+            <span class="lh-dot" style="background:var(--game-bd)"></span>
+            <span class="lh-title">Gamificación — Mi Mochila</span>
+            <span class="rule"></span>
+          </div>
+          <div class="container-box" id="mochila-box" style="--cb-bd:var(--game-bd);--cb-bg:var(--game-fill);">
+            <span class="cb-badge" style="color:var(--game-tx)"><span class="dot" style="background:var(--game-bd)"></span>Mi Mochila</span>
+            <div class="row c4">
+              <div class="node game" id="g-xp"><span class="nt">XP y niveles</span><span class="ns">5 cimas colombianas</span></div>
+              <div class="node game" id="g-logros"><span class="nt">Logros / badges</span><span class="ns">Activación por eventos</span></div>
+              <div class="node game" id="g-rachas"><span class="nt">Rachas (streaks)</span><span class="ns">Días activos consecutivos</span></div>
+              <div class="node game" id="g-ranking"><span class="nt">Ranking</span><span class="ns">Visible por cohorte</span></div>
+            </div>
+            <div class="cb-cap">Eventos verificables dentro de Moodle activan cada mecánica</div>
+          </div>
+        </section>
+
+        <!-- ANALÍTICA -->
+        <section class="layer" data-layer="ana">
+          <div class="layer-head">
+            <span class="lh-dot" style="background:var(--ana-bd)"></span>
+            <span class="lh-title">Analítica y comunicación</span>
+            <span class="rule"></span>
+          </div>
+          <div class="row c3">
+            <div class="node ana" id="an-dashboard"><span class="nt">Dashboard docentes</span><span class="ns">Progreso y alertas</span></div>
+            <div class="node ana" id="an-reportes"><span class="nt">Reportes dinámicos</span><span class="ns">Semanal y por simulacro</span></div>
+            <div class="node ana" id="an-notif"><span class="nt">Notificaciones Moodle</span><span class="ns">Logros, hitos, ranking</span></div>
+          </div>
+        </section>
+
+        <!-- CANAL EXTERNO -->
+        <section class="layer" data-layer="game">
+          <div class="layer-head">
+            <span class="lh-dot" style="background:var(--game-bd)"></span>
+            <span class="lh-title">Canal externo</span>
+            <span class="lh-tag">fuera de la plataforma</span>
+            <span class="rule"></span>
+          </div>
+          <div class="row c2">
+            <div class="node game" id="ext-whatsapp"><span class="nt">WhatsApp Business API</span><span class="ns">Meta · implementado por DBLab</span></div>
+            <div class="node ai" id="ext-personalizacion"><span class="nt">Personalización IA</span><span class="ns">OpenAI — mensajes individualizados</span></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="ftr">
+        <div class="ft-note">Las flechas punteadas indican flujos de eventos y datos; las continuas, dependencias directas. Pasa el cursor sobre una capa o usa la leyenda para enfocarla.</div>
+        <div class="ft-brand"><span class="iso"></span>Sherpa · Juntos llegamos más lejos</div>
+      </footer>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ CONNECTORS ============
+   Define semantic edges between cards; positions are read live from the DOM,
+   so the wiring survives any layout/scale change. */
+const EDGES = [
+  // actores -> núcleo
+  {from:'a-estudiante', to:'moodle-box', f:'b', t:'t', layer:'core'},
+  {from:'a-sherpi',     to:'moodle-box', f:'b', t:'t', layer:'core'},
+  {from:'a-coordinador',to:'moodle-box', f:'b', t:'t', layer:'core'},
+  {from:'a-admin',      to:'moodle-box', f:'b', t:'t', layer:'core'},
+  // núcleo -> contenidos
+  {from:'moodle-box', to:'c-vimeo', f:'b', t:'t', layer:'content'},
+  {from:'moodle-box', to:'c-h5p',   f:'b', t:'t', layer:'content'},
+  {from:'moodle-box', to:'c-s3',    f:'b', t:'t', layer:'content'},
+  {from:'moodle-box', to:'c-pdf',   f:'b', t:'t', layer:'content'},
+  // núcleo -> IA
+  {from:'moodle-box', to:'ai-eco',   f:'b', t:'t', layer:'ai'},
+  {from:'moodle-box', to:'ai-amigo', f:'b', t:'t', layer:'ai'},
+  // IA internos
+  {from:'ai-eco',   to:'ai-raice',  f:'b', t:'t', layer:'ai'},
+  {from:'ai-amigo', to:'ai-abismo', f:'b', t:'t', layer:'ai'},
+  {from:'ai-amigo', to:'ai-banco',  f:'b', t:'t', layer:'ai'},
+  // núcleo -> gamificación (evento, punteada)
+  {from:'moodle-box', to:'mochila-box', f:'b', t:'t', layer:'game', dashed:true},
+  // mis métricas -> analítica (datos, punteada, costado derecho)
+  {from:'m-metricas', to:'an-notif', f:'r', t:'t', layer:'ana', dashed:true},
+  // gamificación -> analítica
+  {from:'mochila-box', to:'an-reportes', f:'b', t:'t', layer:'ana'},
+  // analítica -> whatsapp
+  {from:'an-notif', to:'ext-whatsapp', f:'b', t:'t', layer:'game'},
+  // whatsapp -> personalización
+  {from:'ext-whatsapp', to:'ext-personalizacion', f:'r', t:'l', layer:'ai'},
+];
+
+const svg = document.getElementById('wires');
+const diagram = document.getElementById('diagram');
+const SVGNS = 'http://www.w3.org/2000/svg';
+
+function anchor(el, side, base){
+  const r = el.getBoundingClientRect();
+  const x = r.left - base.left, y = r.top - base.top;
+  switch(side){
+    case 't': return {x:x+r.width/2, y:y};
+    case 'b': return {x:x+r.width/2, y:y+r.height};
+    case 'l': return {x:x, y:y+r.height/2};
+    case 'r': return {x:x+r.width, y:y+r.height/2};
+  }
+}
+
+function buildWires(){
+  const base = diagram.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${base.width} ${base.height}`);
+  svg.innerHTML = `
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+        <path d="M1.5 1L8 5L1.5 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      </marker>
+    </defs>`;
+  const colorOf = {
+    core:'var(--core-bd)', content:'var(--content-bd)', ai:'var(--ai-sf)',
+    game:'var(--game-sf)', ana:'var(--ana-sf)'
+  };
+  EDGES.forEach(e=>{
+    const a = document.getElementById(e.from), b = document.getElementById(e.to);
+    if(!a||!b) return;
+    const p1 = anchor(a, e.f, base), p2 = anchor(b, e.t, base);
+    let d;
+    if((e.f==='r'&&e.t==='l') || (e.f==='l'&&e.t==='r')){
+      const mx = (p1.x+p2.x)/2;
+      d = `M${p1.x},${p1.y} C${mx},${p1.y} ${mx},${p2.y} ${p2.x},${p2.y}`;
+    } else if(e.f==='r'){
+      // route down the right gutter
+      const mx = p1.x + 26;
+      d = `M${p1.x},${p1.y} C${mx},${p1.y} ${p2.x},${p2.y-34} ${p2.x},${p2.y}`;
+    } else {
+      const my = (p1.y+p2.y)/2;
+      d = `M${p1.x},${p1.y} C${p1.x},${my} ${p2.x},${my} ${p2.x},${p2.y}`;
+    }
+    const path = document.createElementNS(SVGNS,'path');
+    path.setAttribute('d', d);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke', colorOf[e.layer] || 'var(--core-bd)');
+    path.setAttribute('stroke-width','1.6');
+    path.setAttribute('stroke-linecap','round');
+    path.setAttribute('opacity','0.55');
+    path.setAttribute('marker-end','url(#ar)');
+    if(e.dashed) path.setAttribute('stroke-dasharray','4 4');
+    path.dataset.layer = e.layer;
+    path.classList.add('wire');
+    svg.appendChild(path);
+  });
+}
+
+/* ============ INTERACTIVITY ============ */
+const body = document.body;
+let focusLayer = null;
+
+function applyFocus(layer){
+  focusLayer = layer;
+  if(layer){
+    body.classList.add('has-focus');
+  } else {
+    body.classList.remove('has-focus');
+  }
+  document.querySelectorAll('.layer').forEach(l=>{
+    l.dataset.dim = (layer && l.dataset.layer !== layer) ? 'true' : 'false';
+  });
+  document.querySelectorAll('.wire').forEach(w=>{
+    const on = !layer || w.dataset.layer === layer;
+    w.setAttribute('opacity', on ? '0.85' : '0.08');
+    w.style.strokeWidth = (layer && on) ? '2.4' : '1.6';
+  });
+  document.querySelectorAll('.chip').forEach(c=>{
+    c.setAttribute('aria-pressed', String(c.dataset.layer === layer));
+  });
+}
+
+// legend click = pin focus (toggle)
+document.getElementById('legend').addEventListener('click', e=>{
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  const l = chip.dataset.layer;
+  applyFocus(focusLayer === l ? null : l);
+});
+
+// hover a layer band = temporary highlight (only when nothing pinned)
+document.querySelectorAll('.layer').forEach(sec=>{
+  sec.addEventListener('mouseenter', ()=>{
+    if(focusLayer) return;
+    const l = sec.dataset.layer;
+    document.querySelectorAll('.wire').forEach(w=>{
+      const on = w.dataset.layer === l;
+      w.setAttribute('opacity', on ? '0.9' : '0.18');
+      if(on) w.style.strokeWidth = '2.4';
+    });
+  });
+  sec.addEventListener('mouseleave', ()=>{
+    if(focusLayer) return;
+    document.querySelectorAll('.wire').forEach(w=>{ w.setAttribute('opacity','0.55'); w.style.strokeWidth='1.6'; });
+  });
+});
+
+/* ============ SCALE TO FIT ============ */
+const scaler = document.getElementById('scaler');
+const poster = document.getElementById('poster');
+function fit(){
+  const avail = window.innerWidth - 48;            // matches #stage horizontal padding
+  const scale = Math.min(1, avail / 820);
+  scaler.style.transform = `scale(${scale})`;
+  // collapse the empty space left by scaling so vertical centering/scroll is correct
+  const h = poster.getBoundingClientRect().height;  // already scaled height
+  scaler.style.height = h + 'px';
+  scaler.style.width = (820*scale) + 'px';
+}
+
+function refresh(){ buildWires(); fit(); }
+window.addEventListener('resize', refresh);
+window.addEventListener('load', ()=>{ buildWires(); fit(); setTimeout(refresh,150); });
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+refresh();
+</script>
+</body>
+</html>
