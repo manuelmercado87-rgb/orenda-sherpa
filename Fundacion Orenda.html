@@ -6,6 +6,7 @@
 <title>Fundación Orenda — Sherpa</title>
 <link rel="stylesheet" href="orenda.css">
 <link rel="stylesheet" href="orenda-brand.css">
+<script src="image-slot.js"></script>
 </head>
 <body>
 
@@ -37,7 +38,7 @@
 
 <!-- ── HERO ── -->
 <section id="hero">
-  <div class="hero-photo-hint"></div>
+  <image-slot id="hero-photo" class="hero-photo" shape="rect" placeholder="Foto de fondo — jóvenes / estudiantes"></image-slot>
   <div class="hero-bg"></div>
   <div class="hero-grain"></div>
   <div class="hero-label">Fundación Orenda — Colombia</div>
@@ -48,7 +49,7 @@
     <div class="hero-lockup">
       <span class="hero-lockup-label">Una fundación · un programa</span>
       <div class="hero-lockup-logos">
-        <span class="hero-lockup-orenda">Fundación Orenda</span>
+        <image-slot id="orenda-logo" class="hero-lockup-orenda-slot" shape="rect" fit="contain" placeholder="Logo Orenda"></image-slot>
         <span class="hero-lockup-x">+</span>
         <img src="uploads/logo.png" alt="Sherpa" class="hero-lockup-sherpa">
       </div>
@@ -107,11 +108,10 @@
     <div class="section-label">NUESTRA ESENCIA</div>
     <div class="mision-accent">✦</div>
     <h2 class="section-title">Cada joven lleva<br>dentro una orenda.</h2>
+    <p class="mision-define"><b>Orenda:</b> una fuerza capaz de producir cambios mediante la intención y la acción para así transformar la realidad.</p>
     <div class="mision-body">
-      <p>Una fuerza capaz de producir cambios mediante la intención y la acción para así transformar la realidad.</p>
-      <p>Nuestro propósito es ayudarle a descubrirla. Lo hacemos a través de educación, acompañamiento y mentoría — desde el colegio hasta el primer empleo.</p>
+      <p>Nuestro propósito es ayudar a cada joven a descubrirla — a través de educación, acompañamiento y mentoría, desde el colegio hasta el primer empleo.</p>
     </div>
-    <div class="mision-quote">"Orenda" significa la fuerza interior que habita en cada ser humano.</div>
   </div>
 </section>
 
@@ -125,15 +125,15 @@
   <div class="sherpa-stats-grid">
     <div class="sherpa-stat-card reveal visible">
       <div class="sherpa-stat-num" data-target="4">4 de cada 10</div>
-      <div class="sherpa-stat-text"><strong>logran graduarse</strong><br>Jóvenes de estratos 1, 2 y 3 que ingresan a la universidad logran graduarse. (Spadies)</div>
+      <div class="sherpa-stat-text"><strong>logran graduarse</strong>Jóvenes de estratos 1, 2 y 3 que ingresan a la universidad logran graduarse.<span class="sherpa-stat-src">Fuente: SPADIES</span></div>
     </div>
     <div class="sherpa-stat-card reveal reveal-delay-1 visible">
       <div class="sherpa-stat-num" data-target="78">78<span style="font-size:0.4em"> puntos</span></div>
-      <div class="sherpa-stat-text"><strong>de brecha en el Saber 11</strong><br>De diferencia significativa entre colegios privados y públicos. (Saber 11: 2025)</div>
+      <div class="sherpa-stat-text"><strong>de brecha en el Saber 11</strong>De diferencia en la prueba Saber 11 entre colegios privados y públicos.<span class="sherpa-stat-src">Fuente: Saber 11, 2025</span></div>
     </div>
     <div class="sherpa-stat-card reveal reveal-delay-2 visible">
       <div class="sherpa-stat-num" data-target="28%">28%</div>
-      <div class="sherpa-stat-text"><strong>no estudia ni trabaja</strong><br>El 28% de los jóvenes entre 14 y 28 años está fuera del sistema educativo y laboral. (SPADIES 2022)</div>
+      <div class="sherpa-stat-text"><strong>ni estudia ni trabaja</strong>De los jóvenes entre 14 y 28 años no estudia ni trabaja.<span class="sherpa-stat-src">Fuente: SPADIES, 2022</span></div>
     </div>
   </div>
 </section>
@@ -147,33 +147,38 @@
     <h2 class="section-title">Del colegio al primer empleo:<br>Un camino con propósito.</h2>
     <p>Guiamos a los jóvenes en cada etapa de su transformación, desde la preparación académica y emocional en grado 11 hasta su primera oportunidad laboral.</p>
   </div>
-  <div class="pathway" style="grid-template-columns: repeat(4,1fr)">
-    <div class="pathway-step reveal visible">
-      <div class="pathway-dot"></div>
-      <h4>01 · Sherpa</h4>
-      <p style="font-size:11px;font-weight:700;color:var(--peach);margin-bottom:6px">Preparación académica y socioemocional</p>
-      <p>Plataforma educativa con IA, gamificación y mentoría humana para preparar la Prueba Saber 11 y el examen de admisión de la Universidad Nacional.</p>
+  <div class="modelo-timeline reveal visible">
+    <div class="ml-step">
+      <div class="ml-marker">01</div>
+      <div class="ml-body">
+        <h4 class="ml-title">Sherpa</h4>
+        <p class="ml-kicker">Preparación académica y socioemocional</p>
+        <p class="ml-desc">Plataforma educativa con IA, gamificación y mentoría humana para preparar la Prueba Saber 11 y el examen de admisión de la Universidad Nacional.</p>
+      </div>
     </div>
-    <div class="pathway-step reveal reveal-delay-1 visible">
-      <div class="pathway-dot"></div>
-      <div class="pathway-arrow">→</div>
-      <h4>02 · Becas-Financiación</h4>
-      <p style="font-size:11px;font-weight:700;color:var(--peach);margin-bottom:6px">De estudio y manutención</p>
-      <p>Abrimos oportunidades en las mejores universidades de Colombia y en carreras con alto potencial profesional.</p>
+    <div class="ml-step">
+      <div class="ml-marker">02</div>
+      <div class="ml-body">
+        <h4 class="ml-title">Becas y financiación</h4>
+        <p class="ml-kicker">De estudio y manutención</p>
+        <p class="ml-desc">Abrimos oportunidades en las mejores universidades de Colombia y en carreras con alto potencial profesional.</p>
+      </div>
     </div>
-    <div class="pathway-step reveal reveal-delay-2 visible">
-      <div class="pathway-dot"></div>
-      <div class="pathway-arrow">→</div>
-      <h4>03 · Acompañamiento</h4>
-      <p style="font-size:11px;font-weight:700;color:var(--peach);margin-bottom:6px">Durante toda la carrera</p>
-      <p>Psicológico, académico y motivacional.</p>
+    <div class="ml-step">
+      <div class="ml-marker">03</div>
+      <div class="ml-body">
+        <h4 class="ml-title">Acompañamiento</h4>
+        <p class="ml-kicker">Durante toda la carrera</p>
+        <p class="ml-desc">Psicológico, académico y motivacional.</p>
+      </div>
     </div>
-    <div class="pathway-step reveal reveal-delay-3 visible">
-      <div class="pathway-dot"></div>
-      <div class="pathway-arrow">→</div>
-      <h4>04 · Primer empleo</h4>
-      <p style="font-size:11px;font-weight:700;color:var(--peach);margin-bottom:6px">Preparación para el mundo laboral</p>
-      <p>Con su hoja de vida, entrevistas y conseguimos pasantías afines a su carrera.</p>
+    <div class="ml-step">
+      <div class="ml-marker">04</div>
+      <div class="ml-body">
+        <h4 class="ml-title">Primer empleo</h4>
+        <p class="ml-kicker">Preparación para el mundo laboral</p>
+        <p class="ml-desc">Con su hoja de vida, entrevistas y conseguimos pasantías afines a su carrera.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -185,7 +190,7 @@
     <div class="section-label">QUIÉN ESTÁ DETRÁS</div>
     <h2 class="section-title">Orenda nació del sueño<br>de una mujer que cree<br>en el poder transformador<br>de las oportunidades.</h2>
     <div class="fundadora-quote-mark">“</div>
-    <p class="fundadora-quote">Creemos que el talento está en todas partes; las oportunidades, no. Por eso acompañamos a jóvenes a imaginar un futuro distinto y a construirlo con las herramientas que reciben hoy.</p>
+    <p class="fundadora-quote">Creemos que el talento está en todas partes; las oportunidades, no. Por eso acompañamos a jóvenes a imaginar un futuro distinto y a construirlo con las herramientas que reciben hoy.<span class="fundadora-quote-close">”</span></p>
     <div class="fundadora-attribution">Adriana León · Fundadora y CEO, Fundación Orenda</div>
     <p class="fundadora-bio">Senior Fellow Harvard Advanced Leadership Initiative. 20 años de carrera corporativa: mercadeo en Unilever, Quala y Varta, y CEO de Bretano Corp. Actualmente, miembro de juntas de Enseña por Colombia, Assist Scholars y EdAccessLab.</p>
   </div>
@@ -199,16 +204,18 @@
     <div class="section-label">ALIADOS</div>
     <h2 class="section-title">Organizaciones que<br>confían en Orenda para<br>transformar Colombia.</h2>
   </div>
-  <div class="aliados-grid reveal reveal-delay-1 visible">
-    <div class="aliado-item">Citi</div>
-    <div class="aliado-item">Crepes &amp; Waffles</div>
-    <div class="aliado-item">U. El Bosque</div>
-    <div class="aliado-item">Alianza Educativa</div>
-    <div class="aliado-item">Fund. Bancolombia</div>
-    <div class="aliado-item">Sabio Caldas</div>
-    <div class="aliado-item">U. Javeriana</div>
-    <div class="aliado-item">Esc. Col. Ingeniería</div>
-    <div class="aliado-item">DO-IT</div>
+  <div class="aliados-marquee reveal reveal-delay-1 visible">
+    <div class="aliados-track marquee-track">
+      <div class="aliado-logo"><image-slot id="aliado-citi" fit="contain" shape="rect" placeholder="Citi"></image-slot></div>
+      <div class="aliado-logo"><image-slot id="aliado-crepes" fit="contain" shape="rect" placeholder="Crepes &amp; Waffles"></image-slot></div>
+      <div class="aliado-logo"><image-slot id="aliado-bosque" fit="contain" shape="rect" placeholder="U. El Bosque"></image-slot></div>
+      <div class="aliado-logo"><image-slot id="aliado-alianza" fit="contain" shape="rect" placeholder="Alianza Educativa"></image-slot></div>
+      <div class="aliado-logo"><image-slot id="aliado-bancolombia" fit="contain" shape="rect" placeholder="Fund. Bancolombia"></image-slot></div>
+      <div class="aliado-logo"><image-slot id="aliado-sabio" fit="contain" shape="rect" placeholder="Sabio Caldas"></image-slot></div>
+      <div class="aliado-logo"><image-slot id="aliado-javeriana" fit="contain" shape="rect" placeholder="U. Javeriana"></image-slot></div>
+      <div class="aliado-logo"><image-slot id="aliado-eci" fit="contain" shape="rect" placeholder="Esc. Col. Ingeniería"></image-slot></div>
+      <div class="aliado-logo"><image-slot id="aliado-doit" fit="contain" shape="rect" placeholder="DO-IT"></image-slot></div>
+    </div>
   </div>
 </section>
 
@@ -305,7 +312,7 @@
     <h2 class="sd3-headline">
       <span class="sd3-h-top">Conoce</span>
       <span class="sd3-h-mid"><img src="uploads/logo.png" alt="Sherpa" class="sd3-logo"></span>
-      <span class="sd3-h-bot">Y así comienza el camino.<br>Conoce nuestro programa estrella.</span>
+      <span class="sd3-h-bot">Plataforma educativa y tecnológica que prepara para la prueba Saber 11 y el examen de admisión a la Universidad Nacional.</span>
     </h2>
     <a href="#sherpa-hero" class="sd3-cta">Conoce el programa ↗</a>
   </div>
@@ -404,7 +411,7 @@
     <h2 class="section-title">Preparación integral<br>en 4 dimensiones.</h2>
     <p style="font-size:17px;line-height:1.7;color:var(--dark-gray);margin-top:16px">Partimos de las debilidades reales de cada estudiante en el Saber 11 y examen de admisión de la UNAL y construimos un programa personalizado de 19 semanas que integra lo académico, lo socioemocional, lo vocacional y la autogestión.</p>
   </div>
-  <div class="que-es-badge reveal reveal-delay-1 visible">⏱ 19 semanas · Virtual + sesiones presenciales</div>
+  <div class="que-es-badge reveal reveal-delay-1 visible">19 semanas · Virtual + sesiones presenciales</div>
   <div class="dimensiones-grid">
     <div class="dimension-card reveal visible">
       <div class="dimension-num">01</div>
@@ -458,7 +465,7 @@
 <section id="como-funciona" style="background-size: cover">
   <div class="reveal visible">
     <div class="section-label">TECNOLOGÍA AL SERVICIO DEL ESTUDIANTE</div>
-    <h2 class="section-title">La plataforma que<br>cierra brechas,<br>no las profundiza.</h2>
+    <h2 class="section-title">Tecnología que se adapta<br>a cada estudiante.</h2>
   </div>
   <div class="features-grid">
     <div class="feature-card reveal visible">
@@ -552,7 +559,7 @@
 <section id="resultados">
   <div class="reveal visible">
     <div class="section-label">RESULTADOS</div>
-    <h2 class="section-title">Los números<br>que importan.</h2>
+    <h2 class="section-title">Una plataforma probada,<br>con resultados contundentes.</h2>
   </div>
   <p class="impacto-sub reveal reveal-delay-1 visible">Resultados reales de jóvenes que transformaron su futuro con Sherpa.</p>
   <div class="impacto-grid">
@@ -594,23 +601,35 @@
     <div class="testimonio-card reveal visible">
       <div class="testimonio-accent">❝</div>
       <p class="testimonio-text">Gracias a Sherpa encontré estrategias para desempeñarme mejor en muchas áreas de mi vida.</p>
-      <div class="testimonio-avatar"></div>
-      <div class="testimonio-name">Hanna López</div>
-      <div class="testimonio-role">Ing. Mecánica · Escuela Col. de Ingeniería</div>
+      <div class="testimonio-foot">
+        <image-slot id="testi-hanna" class="testimonio-photo" shape="circle" placeholder="Foto"></image-slot>
+        <div>
+          <div class="testimonio-name">Hanna López</div>
+          <div class="testimonio-role">Ing. Mecánica · Escuela Col. de Ingeniería</div>
+        </div>
+      </div>
     </div>
     <div class="testimonio-card reveal reveal-delay-1 visible">
       <div class="testimonio-accent">❝</div>
       <p class="testimonio-text">Esta beca fue un voto de confianza en mí — la prueba de que alguien creyó en mi capacidad como estudiante.</p>
-      <div class="testimonio-avatar" style="background:linear-gradient(135deg,#31b498,#035966)"></div>
-      <div class="testimonio-name">Yemmy Tatiana Rivera</div>
-      <div class="testimonio-role">Ing. Civil · U. Javeriana</div>
+      <div class="testimonio-foot">
+        <image-slot id="testi-yemmy" class="testimonio-photo" shape="circle" placeholder="Foto"></image-slot>
+        <div>
+          <div class="testimonio-name">Yemmy Tatiana Rivera</div>
+          <div class="testimonio-role">Ing. Civil · U. Javeriana</div>
+        </div>
+      </div>
     </div>
     <div class="testimonio-card reveal reveal-delay-2 visible">
       <div class="testimonio-accent">❝</div>
       <p class="testimonio-text">Estoy cumpliendo una promesa conmigo mismo. Celebramos el triunfo de ser el primer abogado de la familia.</p>
-      <div class="testimonio-avatar" style="background:linear-gradient(135deg,#c7b5f3,#035966)"></div>
-      <div class="testimonio-name">Juan Diego García</div>
-      <div class="testimonio-role">Derecho · U. Sto. Tomás Villavicencio</div>
+      <div class="testimonio-foot">
+        <image-slot id="testi-juan" class="testimonio-photo" shape="circle" placeholder="Foto"></image-slot>
+        <div>
+          <div class="testimonio-name">Juan Diego García</div>
+          <div class="testimonio-role">Derecho · U. Sto. Tomás Villavicencio</div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="reveal visible" style="margin-top:64px">
@@ -630,6 +649,11 @@
 
 
 <section id="equipo">
+  <div class="equipo-section-head">
+    <div class="section-label">NUESTRO EQUIPO</div>
+    <h2 class="section-title">Las personas que<br>hacen posible Sherpa.</h2>
+    <p class="equipo-section-sub">Un equipo interdisciplinario de expertos en educación, psicología, diseño instruccional y tecnología.</p>
+  </div>
   <div class="eq-hero">
     <!-- Left: active member info -->
     <div class="eq-left">
@@ -679,8 +703,14 @@
     <div class="section-label">OPERADO EN ALIANZA CON</div>
     <p class="alianza-text">Sherpa es operado en alianza con <strong>Enseña por Colombia</strong>, parte de la red global <strong>Teach For All</strong>.</p>
     <div class="alianza-logos">
-      <a href="https://ensenaporcolombia.org" target="_blank" rel="noopener" class="alianza-logo">Enseña por Colombia ↗</a>
-      <a href="https://teachforall.org" target="_blank" rel="noopener" class="alianza-logo">Teach For All ↗</a>
+      <div class="alianza-logo-link">
+        <image-slot id="logo-epc" class="alianza-logo-slot" fit="contain" placeholder="Enseña por Colombia"></image-slot>
+        <a href="https://ensenaporcolombia.org" target="_blank" rel="noopener" class="alianza-logo-visit">Visitar ↗</a>
+      </div>
+      <div class="alianza-logo-link">
+        <image-slot id="logo-tfa" class="alianza-logo-slot" fit="contain" placeholder="Teach For All"></image-slot>
+        <a href="https://teachforall.org" target="_blank" rel="noopener" class="alianza-logo-visit">Visitar ↗</a>
+      </div>
     </div>
   </div>
 </section>
